@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/font-awesome.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    
+  body
+    nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+      .container
+        button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        a.navbar-brand(href='#') Library DB
+        #navbarSupportedContent.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            li.nav-item.active
+              a.nav-link(href='index.html')
+                | Main Books
+                span.sr-only (current)
+            li.nav-item
+              a.nav-link(href='#') Dashborad
+            li.nav-item
+              a.nav-link(href='admin-panel.html') Admin Panel
+          form.form-inline.my-2.my-lg-0
+            input.form-control.mr-sm-2(type='text', placeholder='Search books...', required='')
+            button.btn.btn-outline-default.my-2.my-sm-0(type='submit')
+              i.fa.fa-search(aria-hidden='true')
+    br
+    br
+    block con

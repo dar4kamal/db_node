@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  .container
+    .row.row-offcanvas.row-offcanvas-right
+      .col-12.col-md-9
+        .container.marketing
+          // Three columns of text below the carousel
+          .row
+            - for (var i = 0; i < books.length; i++)
+              .col-lg-4
+                img(src='images/' + books[i].cover, alt=books[i].title, width='176', height='233')
+                h3.book-title #{books[i].title}
+                p.book-author
+                  span.text-small By:
+                  | #{books[i].author}
+                p
+                  a.btn.btn-secondary.btn-sm(href='#', role='button') Details »
+                  a.btn.btn-primary.btn-sm(href='#', role='button')
+                    | Borrow
+                    i.fa.fa-plus-square-o.right(aria-hidden='true')
+              // /.col-lg-4
+          // /.row
+      // /span
+      #sidebar.col-6.col-md-3.sidebar-offcanvas
+        .list-group
+          a.list-group-item.active(href='#')
+            i.fa.left.fa-angle-double-up(aria-hidden='true')
+            |             All Books
+          a.list-group-item(href='#')
+            i.fa.left.fa-clock-o(aria-hidden='true')
+            |             Latest
+          a.list-group-item(href='#')
+            i.fa.left.fa-map-o(aria-hidden='true')
+            |             History
+          a.list-group-item(href='#')
+            i.fa.left.fa-file-code-o(aria-hidden='true')
+            |             Programming
+          a.list-group-item(href='#')
+            i.fa.left.fa-font(aria-hidden='true')
+            |             Literature
+          a.list-group-item(href='#')
+            i.fa.left.fa-child(aria-hidden='true')
+            |               Children
+          a.list-group-item(href='#')
+            i.fa.left.fa-heart(aria-hidden='true')
+            |               Romance
+          a.list-group-item(href='#')
+            i.fa.left.fa-cutlery(aria-hidden='true')
+            |               Cookbooks
+          a.list-group-item(href='#')
+            i.fa.left.fa-random(aria-hidden='true')
+            |               Shuffle
+      // /span
+    // /row
+  // /.container

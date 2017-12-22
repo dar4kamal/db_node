@@ -1,0 +1,90 @@
+extends layout
+
+block content
+    .container.book-table
+        h1 Add book
+        p Fill the information below...
+        hr
+        form(action="/add_book" method="post")
+            .form-group
+                .row
+                    .col-3
+                        p.bold Title
+                    .col-6
+                        input.form-control.form-control-sm(type='text', name="title")
+            .form-group
+                .row
+                    .col-3
+                        p.bold Author
+                    .col-6
+                        .row
+                            .col-4
+                                input.form-control.form-control-sm(placeholder='Name', type='text', name="author")
+                            .col-4
+                                input.form-control.form-control-sm(type='text', placeholder='Address')
+                            .col-4
+                                input.form-control.form-control-sm(type='text', placeholder='Nationality')
+            .form-group
+                .row
+                    .col-3
+                        p.bold Cover image
+                    .col-6
+                        input.form-control-file(type='file', name="cover")
+            .form-group
+                .row
+                    .col-3
+                        p.bold Pages number
+                    .col-6
+                        input.form-control.form-control-sm(type='number', name="pages_no")
+            .form-group
+                .row
+                    .col-3
+                        p.bold Category
+                    .col-6
+                        select.form-control.form-control-sm(name="category")
+                            option Literature
+                            option Others
+            .form-group
+                .row
+                    .col-3
+                        p.bold ISBN
+                    .col-6
+                        input.form-control.form-control-sm(type='text', name="isbn")
+            .form-group
+                .row
+                    .col-3
+                        p.bold Publish year
+                    .col-6
+                        input.form-control.form-control-sm(type='number', name="publish_year")
+            .form-group
+                .row
+                    .col-3
+                        p.bold Edition
+                    .col-6
+                        input.form-control.form-control-sm(type='text', name="edition")
+            .form-group
+                .row
+                    .col-3
+                        p.bold Description
+                    .col-6
+                        input.form-control.form-control-sm(type='text', name="description")
+            .form-group
+                .row
+                    .col-3
+                        p.bold Publisher
+                    .col-6
+                        .row
+                            .col-6
+                                input.form-control.form-control-sm(placeholder='Name', type='text', name="publisher")
+                            .col-6
+                                input.form-control.form-control-sm(type='text', placeholder='Address')
+
+
+            button.btn.btn-primary(type="submit") Add
+        hr
+        footer
+            p
+                | © Database Simulation Project
+                .text-small supervised by Dr: Amany Sarhan
+    // /.container
+
