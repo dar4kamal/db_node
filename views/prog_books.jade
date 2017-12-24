@@ -13,7 +13,7 @@ block content
                 h3.book-title #{books[i].title}
                 p.book-author
                   span.text-small By:
-                  | #{books[i].author}
+                  | #{books[i].Author_name}
                 p
                   a.btn.btn-secondary.btn-sm(href='#', role='button', data-toggle="modal", data-target="#book_det_modal" + i) Details »
                   a.btn.btn-primary.btn-sm(href='#', role='button')
@@ -41,12 +41,11 @@ block content
                           p Edition
                           p Description
                           p Available
-                          p Borrowers
                           p Publisher
                         .col-7
                           p #{books[i].title}
                           p
-                            | #{books[i].author}
+                            | #{books[i].Author_name}
                             a.btn.btn-link.btn-sm(href='#', role='button')
                               i.fa.fa-external-link(aria-hidden='true')
                           p
@@ -58,13 +57,9 @@ block content
                           p #{books[i].edition}
                           p
                             | #{books[i].description}
-                          p #{books[i].available}
+                          p #{books[i].avilable}
                           p
-                            | #{books[i].borrowers}
-                            a.btn.btn-link.btn-sm(href='#', role='button')
-                              i.fa.fa-external-link(aria-hidden='true')
-                          p
-                            | #{books[i].publisher}
+                            | #{books[i].Publisher_name}
                             a.btn.btn-link.btn-sm(href='#', role='button')
                               i.fa.fa-external-link(aria-hidden='true')
                     // Modal footer

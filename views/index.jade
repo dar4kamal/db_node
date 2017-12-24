@@ -13,10 +13,12 @@ block content
                 h3.book-title #{books[i].title}
                 p.book-author
                   span.text-small By:
-                  | #{books[i].author}
+                  | #{books[i].Author_name}
                 p
                   a.btn.btn-secondary.btn-sm(href='#', role='button', data-toggle="modal", data-target="#book_det_modal" + i) Details »
-                  a.btn.btn-primary.btn-sm(href='#', role='button')
+                  - var av = (books[i].avilable == 1);
+                  a.btn.btn-primary.btn-sm(href='#', role='button', data-toggle="modal",
+                  data-target="#borrow_modal" + i, class=av? "": "disabled")
                     | Borrow
                     i.fa.fa-plus-square-o.right(aria-hidden='true')
               // The Modal
@@ -41,12 +43,11 @@ block content
                           p Edition
                           p Description
                           p Available
-                          p Borrowers
                           p Publisher
                         .col-7
                           p #{books[i].title}
                           p
-                            | #{books[i].author}
+                            | #{books[i].Author_name}
                             a.btn.btn-link.btn-sm(href='#', role='button')
                               i.fa.fa-external-link(aria-hidden='true')
                           p
@@ -58,19 +59,78 @@ block content
                           p #{books[i].edition}
                           p
                             | #{books[i].description}
-                          p #{books[i].available}
+                          p #{books[i].avilable}
                           p
-                            | #{books[i].borrowers}
-                            a.btn.btn-link.btn-sm(href='#', role='button')
-                              i.fa.fa-external-link(aria-hidden='true')
-                          p
-                            | #{books[i].publisher}
+                            | #{books[i].Publisher_name}
                             a.btn.btn-link.btn-sm(href='#', role='button')
                               i.fa.fa-external-link(aria-hidden='true')
                     // Modal footer
                     .modal-footer
                       button.btn.btn-secondary(type='button', data-dismiss='modal') Close
               // /.col-lg-4
+              div(id="borrow_modal" + i, class="modal fade")
+                .modal-dialog.modal-lg
+                  .modal-content
+                    // Modal Header
+                    .modal-header
+                      h4.modal-title Borrow book
+                      button.close(type='button', data-dismiss='modal') ×
+                    // Modal body
+                    .modal-body
+                      form(action="/borrow_book", method="post")
+                        input(type='text', name="book_id", value=books[i].book_id, style="display: none")
+                        .form-group
+                          .row
+                            .col-3
+                              p.bold Name
+                            .col-6
+                              input.form-control.form-control-sm(type='text', name="Name")
+                        .form-group
+                          .row
+                            .col-3
+                              p.bold Address
+                            .col-6
+                              input.form-control.form-control-sm(type='text', name="Address")
+                        .form-group
+                          .row
+                            .col-3
+                              p.bold Email
+                            .col-6
+                              input.form-control.form-control-sm(type='email', name="Email")
+                        .form-group
+                          .row
+                            .col-3
+                              p.bold Contact Number
+                            .col-6
+                              input.form-control.form-control-sm(type='text', name="Contact_number")
+                        .form-group
+                          .row
+                            .col-3
+                              p.bold Gender
+                            .col-6
+                              select.form-control.form-control-sm(name="Gender")
+                                option Male
+                                option Female
+                        .form-group
+                          .row
+                            .col-3
+                              p.bold Membership
+                            .col-6
+                              .row
+                                .col-6
+                                  input.form-control.form-control-sm(placeholder='Type', type='text', name="Mem_type")
+                                .col-6
+                                  input.form-control.form-control-sm(type='date', placeholder='Exp. date', name="Exp_date")
+                        .form-group
+                          .row
+                            .col-3
+                              p.bold Department
+                            .col-6
+                              input.form-control.form-control-sm(type='text', name="Department_name")
+                        button.btn.btn-primary(type="submit") Borrow
+                    // Modal footer
+                    .modal-footer
+                      button.btn.btn-secondary(type='button', data-dismiss='modal') Close
           // /.row
       // /span
       include sidebar

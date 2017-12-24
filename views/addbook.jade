@@ -19,11 +19,11 @@ block content
                     .col-6
                         .row
                             .col-4
-                                input.form-control.form-control-sm(placeholder='Name', type='text', name="author")
+                                input.form-control.form-control-sm(placeholder='Name', type='text', name="Author_name")
                             .col-4
-                                input.form-control.form-control-sm(type='text', placeholder='Address')
+                                input.form-control.form-control-sm(type='text', placeholder='Address', name="Author_address")
                             .col-4
-                                input.form-control.form-control-sm(type='text', placeholder='Nationality')
+                                input.form-control.form-control-sm(type='text', placeholder='Nationality', name="Nationality")
             .form-group
                 .row
                     .col-3
@@ -41,9 +41,7 @@ block content
                     .col-3
                         p.bold Category
                     .col-6
-                        select.form-control.form-control-sm(name="category")
-                            option Literature
-                            option Others
+                        input.form-control.form-control-sm(type='text', name="category")
             .form-group
                 .row
                     .col-3
@@ -75,9 +73,9 @@ block content
                     .col-6
                         .row
                             .col-6
-                                input.form-control.form-control-sm(placeholder='Name', type='text', name="publisher")
+                                input.form-control.form-control-sm(placeholder='Name', type='text', name="Publisher_name")
                             .col-6
-                                input.form-control.form-control-sm(type='text', placeholder='Address')
+                                input.form-control.form-control-sm(type='text', placeholder='Address', name="Publisher_address")
 
 
             button.btn.btn-primary(type="submit") Add
