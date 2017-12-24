@@ -1,0 +1,78 @@
+extends layout
+
+block content
+    .container.book-table
+        ul.pagination.pagination-lg.justify-content-center#switchTab
+            li.page-item
+                a.page-link(href='/admin_panel') Books
+            li.page-item
+                a.page-link(href='/admin_panel/authors') Authors
+            li.page-item
+                a.page-link(href='/admin_panel/publishers') Publishers
+            li.page-item
+                a.page-link(href='/admin_panel/borrowers') Borrowers
+        div
+            span Note:
+            button.btn.btn-sm.btn-outline-info
+                i.fa.fa-info-circle(aria-hidden='true')
+                |                 View full information
+            button.btn.btn-sm.btn-outline-warning
+                i.fa.fa-pencil(aria-hidden='true')
+                |                 Edit information
+            button.btn.btn-sm.btn-outline-danger
+                i.fa.fa-trash(aria-hidden='true')
+                |                 Delete
+        hr
+        h1
+            | Publishers
+        table.table.table-sm
+            thead
+                tr
+                    th ID
+                    th Publisher name
+                    th Publisher Address
+            tbody
+                - for(var i = 0; i < publishers.length; i++)
+                    tr
+                        th(scope='row') #{publishers[i].Publisher_id}
+                        td #{publishers[i].Publisher_name}
+                        td #{publishers[i].Publisher_address}
+                        td.custom-control
+                            button.btn.btn-sm.btn-outline-warningwarning(data-toggle="modal", data-target="#editModal" + i)
+                                i.fa.fa-pencil(aria-hidden='true')
+                    div(id="editModal" + i, class="modal fade")
+                        .modal-dialog.modal-lg
+                            .modal-content
+                                // Modal Header
+                                .modal-header
+                                    h4.modal-title Edit Publisher
+                                    button.close(type='button', data-dismiss='modal') ×
+                                // Modal body
+                                .modal-body
+                                    form(action="/edit/publisher", method="post")
+                                        input(type='text', name="Publisher_id", value=publishers[i].Publisher_id, style="display: none")
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Publisher name
+                                                .col-6
+                                                    input.form-control.form-control-sm(type='text', name="Publisher_name",
+                                                    value=publishers[i].Publisher_name)
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Publisher Address
+                                                .col-6
+                                                    input.form-control.form-control-sm(placeholder='Name', type='text',
+                                                    name="Publisher_address", value=publishers[i].Publisher_address)
+                                        button.btn.btn-primary(type="submit") Edit
+                                // Modal footer
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+
+        hr
+        footer
+            p
+                | © Database Simulation Project
+                .text-small supervised by Dr: Amany Sarhan
+    // /.container

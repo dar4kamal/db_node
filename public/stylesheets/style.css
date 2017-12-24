@@ -54,3 +54,7 @@ i.right {
 .modal-body p {
   height: 1.5rem;
 }
+
+#switchTab .nav-item {
+  background: #ccc;
+}

@@ -1,0 +1,85 @@
+extends layout
+
+block content
+    .container.book-table
+        ul.pagination.pagination-lg.justify-content-center#switchTab
+            li.page-item
+                a.page-link(href='/admin_panel') Books
+            li.page-item
+                a.page-link(href='/admin_panel/authors') Authors
+            li.page-item
+                a.page-link(href='/admin_panel/publishers') Publishers
+            li.page-item
+                a.page-link(href='/admin_panel/borrowers') Borrowers
+        div
+            span Note:
+            button.btn.btn-sm.btn-outline-info
+                i.fa.fa-info-circle(aria-hidden='true')
+                |                 View full information
+            button.btn.btn-sm.btn-outline-warning
+                i.fa.fa-pencil(aria-hidden='true')
+                |                 Edit information
+            button.btn.btn-sm.btn-outline-danger
+                i.fa.fa-trash(aria-hidden='true')
+                |                 Delete
+        hr
+        h1
+            | Authors
+        table.table.table-sm
+            thead
+                tr
+                    th ID
+                    th Author name
+                    th Address
+                    th Nationality
+            tbody
+                - for(var i = 0; i < authors.length; i++)
+                    tr
+                        th(scope='row') #{authors[i].Author_id}
+                        td #{authors[i].Author_name}
+                        td #{authors[i].Author_address}
+                        td #{authors[i].Nationality}
+                        td.custom-control
+                            button.btn.btn-sm.btn-outline-warningwarning(data-toggle="modal", data-target="#editModal" + i)
+                                i.fa.fa-pencil(aria-hidden='true')
+                    div(id="editModal" + i, class="modal fade")
+                        .modal-dialog.modal-lg
+                            .modal-content
+                                // Modal Header
+                                .modal-header
+                                    h4.modal-title Edit Auhtor
+                                    button.close(type='button', data-dismiss='modal') ×
+                                // Modal body
+                                .modal-body
+                                    form(action="/edit/author", method="post")
+                                        input(type='text', name="Author_id", value=authors[i].Author_id, style="display: none")
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Author name
+                                                .col-6
+                                                    input.form-control.form-control-sm(type='text', name="Author_name", value=authors[i].Author_name)
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Author Address
+                                                .col-6
+                                                    input.form-control.form-control-sm(placeholder='Name', type='text',
+                                                    name="Author_address", value=authors[i].Author_address)
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Category
+                                                .col-6
+                                                    input.form-control.form-control-sm(type='text', name="Nationality", value=authors[i].Nationality)
+                                        button.btn.btn-primary(type="submit") Edit
+                                // Modal footer
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+
+        hr
+        footer
+            p
+                | © Database Simulation Project
+                .text-small supervised by Dr: Amany Sarhan
+    // /.container

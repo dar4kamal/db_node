@@ -1,3 +1,190 @@
 extends layout
 
 block content
+    .container.book-table
+        ul.pagination.pagination-lg.justify-content-center#switchTab
+            li.page-item
+                a.page-link(href='/admin_panel') Books
+            li.page-item
+                a.page-link(href='/admin_panel/authors') Authors
+            li.page-item
+                a.page-link(href='/admin_panel/publishers') Publishers
+            li.page-item
+                a.page-link(href='/admin_panel/borrowers') Borrowers
+        div
+            span Note:
+            button.btn.btn-sm.btn-outline-info
+                i.fa.fa-info-circle(aria-hidden='true')
+                |                 View full information
+            button.btn.btn-sm.btn-outline-warning
+                i.fa.fa-pencil(aria-hidden='true')
+                |                 Edit information
+            button.btn.btn-sm.btn-outline-danger
+                i.fa.fa-trash(aria-hidden='true')
+                |                 Delete
+        hr
+        h1
+            | Books
+            a.btn.btn-primary(style='float: right', href='/add_book')
+                | Add book
+                i.fa.fa-plus.right(aria-hidden='true')
+        table.table.table-sm
+            thead
+                tr
+                    th ID
+                    th Title
+                    th Author
+                    th Publish year
+                    th Edition
+                    th Publisher
+                    th Available?
+                    th Control
+            tbody
+                - for(var i = 0; i < books.length; i++)
+                    tr
+                        th(scope='row') #{books[i].book_id}
+                        td #{books[i].title}
+                        td #{books[i].Author_name}
+                        td #{books[i].publish_year}
+                        td #{books[i].edition}
+                        td #{books[i].Publisher_name}
+                        - var av = (books[i].avilable == true)
+                        td #{av? "Yes": "No"}
+                        td.custom-control
+                            button.btn.btn-sm.btn-outline-info(data-toggle="modal", data-target="#book_det_modal" + i)
+                                i.fa.fa-info-circle(aria-hidden='true')
+                            button.btn.btn-sm.btn-outline-warning(data-toggle="modal", data-target="#editBookModal" + i)
+                                i.fa.fa-pencil(aria-hidden='true')
+                            form(action="/delete/" + books[i].book_id)
+                                button.btn.btn-sm.btn-outline-danger(type="submit")
+                                    i.fa.fa-trash(aria-hidden='true')
+                    div(id="editBookModal" + i, class="modal fade")
+                        .modal-dialog.modal-lg
+                            .modal-content
+                                // Modal Header
+                                .modal-header
+                                    h4.modal-title Edit book
+                                    button.close(type='button', data-dismiss='modal') ×
+                                // Modal body
+                                .modal-body
+                                    form(action="/edit/book", method="post")
+                                        input(type='text', name="book_id", value=books[i].book_id, style="display: none")
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Title
+                                                .col-6
+                                                    input.form-control.form-control-sm(type='text', name="title", value=books[i].title)
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Author
+                                                .col-6
+                                                    input.form-control.form-control-sm(placeholder='Name', type='text',
+                                                    name="Author_name", value=books[i].Author_name)
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Cover image
+                                                .col-6
+                                                    input.form-control-file(type='file', name="cover", value=books[i].cover)
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Pages number
+                                                .col-6
+                                                    input.form-control.form-control-sm(type='number', name="pages_no", value=books[i].pages_no)
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Category
+                                                .col-6
+                                                    input.form-control.form-control-sm(type='text', name="category", value=books[i].category)
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold ISBN
+                                                .col-6
+                                                    input.form-control.form-control-sm(type='text', name="isbn", value=books[i].isbn)
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Publish year
+                                                .col-6
+                                                    input.form-control.form-control-sm(type='number', name="publish_year", value=books[i].publish_year)
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Edition
+                                                .col-6
+                                                    input.form-control.form-control-sm(type='text', name="edition", value=books[i].edition)
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Description
+                                                .col-6
+                                                    input.form-control.form-control-sm(type='text', name="description", value=books[i].description)
+                                        .form-group
+                                            .row
+                                                .col-3
+                                                    p.bold Publisher
+                                                .col-6
+                                                    input.form-control.form-control-sm(placeholder='Name', type='text', name="Publisher_name",
+                                                    value=books[i].Publisher_name)
+                                        button.btn.btn-primary(type="submit") Edit
+                                // Modal footer
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+
+                    div(id="book_det_modal" + i, class="modal fade")
+                        .modal-dialog
+                            .modal-content
+                                // Modal Header
+                                .modal-header
+                                    h4.modal-title Book information
+                                    button.close(type='button', data-dismiss='modal') ×
+                                // Modal body
+                                .modal-body
+                                    .row
+                                        .col-5.bold
+                                            p Title
+                                            p Author
+                                            p Cover image
+                                            p No of pages
+                                            p Category
+                                            p ISBN
+                                            p Publish year
+                                            p Edition
+                                            p Description
+                                            p Available
+                                            p Publisher
+                                        .col-7
+                                            p #{books[i].title}
+                                            p
+                                                | #{books[i].Author_name}
+                                                a.btn.btn-link.btn-sm(href='#', role='button')
+                                                    i.fa.fa-external-link(aria-hidden='true')
+                                            p
+                                                a.link #{books[i].cover}
+                                            p #{books[i].pages_no}
+                                            p #{books[i].category}
+                                            p #{books[i].isbn}
+                                            p #{books[i].publish_year}
+                                            p #{books[i].edition}
+                                            p
+                                                | #{books[i].description}
+                                            p #{books[i].avilable}
+                                            p
+                                                | #{books[i].Publisher_name}
+                                                a.btn.btn-link.btn-sm(href='#', role='button')
+                                                    i.fa.fa-external-link(aria-hidden='true')
+                                // Modal footer
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+
+        hr
+        footer
+            p
+                | © Database Simulation Project
+                .text-small supervised by Dr: Amany Sarhan
+    // /.container

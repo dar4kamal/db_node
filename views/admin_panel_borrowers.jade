@@ -1,0 +1,83 @@
+extends layout
+
+block content
+    .container.book-table
+        ul.pagination.pagination-lg.justify-content-center#switchTab
+            li.page-item
+                a.page-link(href='/admin_panel') Books
+            li.page-item
+                a.page-link(href='/admin_panel/authors') Authors
+            li.page-item
+                a.page-link(href='/admin_panel/publishers') Publishers
+            li.page-item
+                a.page-link(href='/admin_panel/borrowers') Borrowers
+        div
+            span Note:
+            button.btn.btn-sm.btn-outline-info
+                i.fa.fa-info-circle(aria-hidden='true')
+                |                 View full information
+            button.btn.btn-sm.btn-outline-warning
+                i.fa.fa-pencil(aria-hidden='true')
+                |                 Edit information
+            button.btn.btn-sm.btn-outline-danger
+                i.fa.fa-trash(aria-hidden='true')
+                |                 Delete
+        hr
+        h1
+            | Borrowers
+        table.table.table-sm
+            thead
+                tr
+                    th ID
+                    th Name
+                    th Address
+                    th Gender
+                    th Department
+                    th Email
+                    th Contact number
+                    th Control
+            tbody
+                - for(var i = 0; i < borrowers.length; i++)
+                    tr
+                        th(scope='row') #{borrowers[i].ID}
+                        td #{borrowers[i].Name}
+                        td #{borrowers[i].Address}
+                        td #{borrowers[i].Gender}
+                        td #{borrowers[i].Department_name}
+                        td #{borrowers[i].Email}
+                        td #{borrowers[i].Contact_number}
+                        td.custom-control
+                            button.btn.btn-sm.btn-outline-info(data-toggle="modal", data-target="#book_det_modal" + i)
+                                i.fa.fa-info-circle(aria-hidden='true')
+                            button.btn.btn-sm.btn-outline-warning
+                                i.fa.fa-pencil(aria-hidden='true')
+                    div(id="book_det_modal" + i, class="modal fade")
+                        .modal-dialog
+                            .modal-content
+                                // Modal Header
+                                .modal-header
+                                    h4.modal-title Borrower information
+                                    button.close(type='button', data-dismiss='modal') ×
+                                // Modal body
+                                .modal-body
+                                    .row
+                                        .col-5.bold
+                                            p Mem_id
+                                            p Department_id
+                                            p Mem_type
+                                            p Exp_date
+                                        .col-7
+                                            p #{borrowers[i].Mem_id}
+                                            p #{borrowers[i].Department_id}
+                                            p #{borrowers[i].Mem_type}
+                                            p #{borrowers[i].Exp_date}
+                                // Modal footer
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+
+        hr
+        footer
+            p
+                | © Database Simulation Project
+                .text-small supervised by Dr: Amany Sarhan
+    // /.container
