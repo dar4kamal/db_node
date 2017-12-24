@@ -116,6 +116,28 @@ router.post('/borrow_book', function (req, res, next) {
     });
 });
 
+router.get('/search/:word', function (req, res) {
+    var word = req.params.word;
+    word = word.toLowerCase();
+    var sql = "SELECT b.book_id, b.title,b.cover,b.pages_no,b.category,b.isbn,b.edition,b.publish_year,b.description,b.avilable,a.Author_name,p.Publisher_name\n" +
+        "FROM books b \n" +
+        "JOIN author a \n" +
+        "on (b.author_id = a.Author_id)\n" +
+        "Join publisher p\n" +
+        "on (b.publisher_id = p.Publisher_id) WHERE LCASE(b.title) LIKE '%" + word + "%'";
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log(result);
+        res.render('index', { title: 'Express', books: result });
+    })
+});
+
+router.post('/search', function (req, res, next) {
+   var word  = req.body.word;
+   res.redirect('/search/' + word);
+});
+
 router.get('/lit_books', function(req, res, next) {
     var sql = "SELECT b.title,b.cover,b.pages_no,b.category,b.isbn,b.edition,b.publish_year,b.description,b.avilable,a.Author_name,p.Publisher_name\n" +
         "FROM books b \n" +

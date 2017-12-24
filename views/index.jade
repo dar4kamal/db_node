@@ -9,7 +9,7 @@ block content
           .row
             - for (var i = 0; i < books.length; i++)
               .col-lg-4
-                img(src='images/' + books[i].cover, alt=books[i].title, width='176', height='233')
+                img(src='/images/' + books[i].cover, alt=books[i].title, width='176', height='233')
                 h3.book-title #{books[i].title}
                 p.book-author
                   span.text-small By:

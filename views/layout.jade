@@ -16,17 +16,13 @@ html
         #navbarSupportedContent.collapse.navbar-collapse
           ul.navbar-nav.mr-auto
             li.nav-item
-              a.nav-link(href='/')
-                | Main Books
-                span.sr-only (current)
-            li.nav-item
               a.nav-link(href='#') Dashborad
             li.nav-item
               a.nav-link(href='/admin_panel') Admin Panel
             li.nav-item
               a.nav-link(href='/add_book') Add book
-          form.form-inline.my-2.my-lg-0
-            input.form-control.mr-sm-2(type='text', placeholder='Search books...', required='')
+          form(action="/search", method="post").form-inline.my-2.my-lg-0
+            input.form-control.mr-sm-2(type='text', placeholder='Search books...', name="word", required)
             button.btn.btn-outline-default.my-2.my-sm-0(type='submit')
               i.fa.fa-search(aria-hidden='true')
     br
